@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form"
-import { LoginData, schema } from "./validator"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "../../hooks/useAuth"
 import * as S from './style'
+import { TLoginData, loginSchema } from "../../shemas/userSchema"
 
 
 
 const LoginPage = () => {
 
-    const { register, handleSubmit } = useForm<LoginData>({
-        resolver: zodResolver(schema)
+    const { register, handleSubmit } = useForm<TLoginData>({
+        resolver: zodResolver(loginSchema)
     })
     const { signIn, } = useAuth()
 

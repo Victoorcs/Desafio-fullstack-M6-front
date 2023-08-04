@@ -2,12 +2,12 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth'; 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegisterData, schema } from './validator'; 
 import * as S from './style'; 
+import { TUserData,  userSchema } from '../../shemas/userSchema';
 
 const RegisterPage = () => {
-  const { register, handleSubmit } = useForm<RegisterData>({
-    resolver: zodResolver(schema), 
+  const { register, handleSubmit } = useForm<TUserData>({
+    resolver: zodResolver(userSchema), 
   });
   const { signUp, } = useAuth()
 
