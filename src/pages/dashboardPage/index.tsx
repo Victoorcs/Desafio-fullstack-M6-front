@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { NextPage } from "next";
 import UserHeader from "../../components/UserHeader";
-import ListContatos from "../../components/ListContatos";
+
 import { useAuth } from "../../hooks/useAuth";
 import { TUserResponseData } from "../../shemas/userSchema";
+import ListContacts from "../../components/ListContatos";
+import { DashboardContainer, HeaderTitle, HeaderWrapper, ListWrapper } from "./style";
 
 
 
@@ -11,14 +13,13 @@ import { TUserResponseData } from "../../shemas/userSchema";
 const DashboardPage: NextPage = () => {
     const [userData, setUserData] = useState<TUserResponseData | null>(null);
     const auth = useAuth();
-    const contatos = auth.contatos
+    const contatos = auth.contatos;
 
     useEffect(() => {
-        const fetchUserData = () => {
+        const fetchUserData = async () => {
             try {
-                auth.user().then((data) => {
-                    setUserData(data);
-                });
+                const data = await auth.user();
+                setUserData(data);
             } catch (error) {
                 console.error(error);
             }
@@ -26,15 +27,28 @@ const DashboardPage: NextPage = () => {
 
         fetchUserData();
     }, []);
+
     return (
-        <div>
-            {userData && <UserHeader {...userData} />}
-            {contatos && <ListContatos contatos={contatos}/>}
-        </div>
+        <DashboardContainer>
+            <HeaderWrapper>
+                <HeaderTitle>Dashboard</HeaderTitle>
+                {userData && <UserHeader {...userData} />}
+            </HeaderWrapper>
+            <ListWrapper>
+                {contatos && (
+                    <ListContacts contatos={contatos} />
+                )}
+            </ListWrapper>
+        </DashboardContainer>
     );
 }
 
-export default DashboardPage
+export default DashboardPage;
+
+
+
+
+
 
 
 

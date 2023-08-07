@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { TUserResponseData } from "../shemas/userSchema";
 import CreateContatoModal from "./CreateContatoModal";
-import { ActionButton, HeaderContainer, HeaderTitle } from "./UserHeaderStyle";
-
+import { ActionButton, HeaderContainer, HeaderTitle, LogoutButton } from "./UserHeaderStyle";
+import { useAuth } from "../hooks/useAuth";
 
 
 const UserHeader = (user: TUserResponseData) => {
     const { name } = user
     const [isModalOpen, setIsModalOpen] = useState(false)
-
+    const { signOut, } = useAuth()
     const openModal = () => {
         setIsModalOpen(true)
     };
@@ -19,17 +19,20 @@ const UserHeader = (user: TUserResponseData) => {
 
     return (
         <HeaderContainer>
-            <div>
-                <HeaderTitle>{name}</HeaderTitle>
-            </div>
-            <div>
-                <HeaderTitle>Usuário</HeaderTitle>
-            </div>
-            <div>
+            
+                
+            
+            
+                <HeaderTitle>Usuário:{name}</HeaderTitle>
+            
+            
+            
+            
                 <ActionButton href="#" onClick={openModal}>
-                    +
+                    adicionar contato
                 </ActionButton>
-            </div>
+                <LogoutButton onClick={signOut}>Sair</LogoutButton>
+            
             <CreateContatoModal isOpen={isModalOpen} onClose={closeModal} />
         </HeaderContainer>
     );

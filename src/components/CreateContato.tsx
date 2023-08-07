@@ -42,7 +42,7 @@ const CreateContatoForm: React.FC<CreateContactFormProps> = ({ onClose }) => {
                     <Input type="text" placeholder="88988888888" {...register("telefone")} />
                     {errors.telefone && <ErrorMessage>{errors.telefone.message}</ErrorMessage>}
 
-                    <SubmitButton type="submit">Create</SubmitButton>
+                    <SubmitButton type="submit">Criar</SubmitButton>
                 </Form>
             </InnerContainer>
         </Container>

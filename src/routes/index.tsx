@@ -7,10 +7,10 @@ import DashboardPage from "../pages/dashboardPage";
 
 
 const Router = () => (
-<Routes>
-    <Route path='/' element={<LoginPage />} />
-    <Route path='/register' element={<RegisterPage />} />
-    <Route path='/dashboard' element={<DashboardPage />} />
-</Routes>)
+    <Routes>
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/dashboard' element={<DashboardPage />} />
+    </Routes>)
 
 export default Router

@@ -11,7 +11,8 @@ interface AuthProviderProps {
 }
 interface AuthContextValues {
     signIn: (loginData: TLoginData) => Promise<void>,
-    signUp: (userData: TUserData) => Promise<void>
+    signUp: (userData: TUserData) => Promise<void>,
+    signOut: () => void,
     user:  () => Promise<TUserResponseData>,
     createContato: (contatoData: TContato) => Promise<void>,
     contatos: TContatoResponse[] | null,
@@ -47,17 +48,27 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     },[])
 
     const signIn = async (loginData: TLoginData) => {
+      console.log(loginData)
         try {
             const response = await api.post<LoginResponse>("/login", loginData)
             const { token } = response.data
             api.defaults.headers.common.Authorization = `Bearer ${token}`
             localStorage.setItem("your-user:token", token)
-            navigate("users")
+            navigate("dashboard")
         }
         catch (error) {
             console.log(error)
         }
     }
+    const signOut = () => {
+      try {
+          localStorage.removeItem("your-user:token");
+          delete api.defaults.headers.common.Authorization;
+          navigate("/");
+      } catch (error) {
+          console.log(error);
+      }
+  };
 
     const signUp = async (userData: TUserData) => {
         try {
@@ -65,7 +76,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           const { token } = response.data;
           api.defaults.headers.common.Authorization = `Bearer ${token}`
           localStorage.setItem("your-user:token", token);
-          navigate("users");
+          navigate("dashboard");
         } catch (error) {
           console.log(error)
         }
@@ -86,14 +97,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 setContatos(response.data.contacts);
                 return response.data;
             } else {
+                console.error(`Request failed with status code ${response.status}`);
                 return null;
             }
         } catch (err) {
-            console.error(err);
+            console.error("An error occurred:", err);
             return null;
         }
     };
-
 
 
     const createContato = async (contatoData: TContato) => {
@@ -146,9 +157,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       };
     
 
+      
+
     return (
-        <AuthContext.Provider value={{ signIn,signUp,user,createContato,contatos,setContatos,deleteContato}}>
+        <AuthContext.Provider value={{ signIn,signUp,user,createContato,contatos,setContatos,deleteContato,signOut}}>
             {children}
         </AuthContext.Provider>
     )
 }
+
+
+
+
+

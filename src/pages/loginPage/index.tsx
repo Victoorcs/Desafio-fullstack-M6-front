@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "../../hooks/useAuth"
 import * as S from './style'
 import { TLoginData, loginSchema } from "../../shemas/userSchema"
+import { StyledLinkButton } from "./style"
 
 
 
@@ -14,20 +15,21 @@ const LoginPage = () => {
     const { signIn, } = useAuth()
 
     return (
-        <S.Main>
+      <S.Main>
           <S.Card>
-            <S.Title>Login</S.Title>
-            <S.Form onSubmit={handleSubmit(signIn)}>
-              <S.Label htmlFor="email">Email</S.Label>
-              <S.Input type="email" id="email" {...register('email')} />
-              <S.Label htmlFor="password">Senha</S.Label>
-              <S.Input type="password" id="password" {...register('password')} />
-              <S.Button type="submit">Entrar</S.Button>
-            </S.Form>
+              <S.Title>Login</S.Title>
+              <S.Form onSubmit={handleSubmit(signIn)}>
+                  <S.Label htmlFor="email">Email</S.Label>
+                  <S.Input type="email" id="email" {...register('email')} />
+                  <S.Label htmlFor="password">Senha</S.Label>
+                  <S.Input type="password" id="password" {...register('password')} />
+                  <S.Button type="submit">Entrar</S.Button>
+              </S.Form>
+              <StyledLinkButton to="/register">Cadastrar</StyledLinkButton>
           </S.Card>
-        </S.Main>
-      );
-    };
+      </S.Main>
+    ) 
+}
     
-    export default LoginPage;
+    export default LoginPage
 

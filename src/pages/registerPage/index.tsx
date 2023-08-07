@@ -16,13 +16,12 @@ const RegisterPage = () => {
       <S.Card>
         <S.Title>Cadastre-se</S.Title>
         <S.Form onSubmit={handleSubmit(signUp)}>
-          <S.Label htmlFor="email">Email</S.Label>
+          <S.Label htmlFor="email">Email:</S.Label>
           <S.Input type="email" id="email" {...register('email')} />
-          <S.Label htmlFor="password">Password</S.Label>
+          <S.Label htmlFor="password">Senha:</S.Label>
           <S.Input type="password" id="password" {...register('password')} />
-          <S.Label htmlFor="phone">Telefone</S.Label>
+          <S.Label htmlFor="phone">Telefone:</S.Label>
           <S.Input type="tel" id="phone" {...register('telefone')} />
-          
           <S.Button type="submit">Cadastrar</S.Button>
         </S.Form>
       </S.Card>

@@ -16,6 +16,7 @@ const HeaderContainer = styled.header`
 const HeaderTitle = styled.h1`
     font-size: 1.5rem;
     font-weight: 600;
+    color:black;
 `;
 
 const ActionButton = styled.a`
@@ -28,5 +29,19 @@ const ActionButton = styled.a`
         transform: scale(1.1);
     }
 `;
+const LogoutButton = styled.button`
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 
-export{HeaderContainer,HeaderTitle,ActionButton}
+    &:hover {
+        background-color: #d32f2f;
+    }
+`;
+
+
+export{HeaderContainer,HeaderTitle,ActionButton,LogoutButton}

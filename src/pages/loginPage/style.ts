@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Main = styled.main`
@@ -60,4 +61,21 @@ export const ErrorMessage = styled.p`
   color: #d9534f;
   margin-top: 0.5rem;
   font-size: 0.9rem;
+`;
+
+export const StyledLinkButton = styled(Link)`
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #0056b3;
+    }
 `;
